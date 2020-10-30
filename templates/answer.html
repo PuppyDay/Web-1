@@ -1,46 +1,46 @@
 {% extends 'inc/base.html' %}
 {% load static %}
-<div class="ans_head"></div>
+{% block heading %}
+  <div class="row row_quest">
+    <span id="new"></span>
+  </div>
+{% endblock heading %}
 {% block content %}
-      <div class="row question-box box_main">
-        <div class="col-3">
-          <img src="{% static "img/123.jpg" %}" class="question-img im_main" alt="avatar">
-          <div class="row">
-            <input type="number" name="number" class="number" placeholder="1">
-          </div>
-        </div>
-         <div class="col-9">
-           <div class="question-title"><a class="text-dark" href="">How to build a moon park?</a></div>
-           <div class="question-text">Guys, i have trouble with a moon park. Can't find the black-jack...</div>
-            <div class="row">
-           <div class="col-5">
-             <a class="ans_tag" href="">answer (<span>3</span>)</a>
-           </div>
-           <div class="col-7">
-             <span class="ans_tag">Tags:</span>
-             <a class="ans_tag" href="">black-jack bender</a>
-           </div>
-         </div>
-         </div>
+  <div class="row question-box box_main">
+    <div class="col-3">
+      <img src="{% static "img/123.jpg" %}" class="question-img im_main" alt="avatar">
+      <div class="row">
+        <input type="number" name="number" class="number" placeholder="1">
       </div>
-      <hr/>
-
-       {% include 'inc/one_answer.html' %}
+    </div>
+    <div class="col-9">
+      <div class="question-title"><a class="text-dark" href="">How to build a moon park?</a></div>
+      <div class="question-text">Guys, i have trouble with a moon park. Can't find the black-jack...</div>
+      <div class="row">
+        <div class="col-5">
+          <a class="ans_tag" href="">answer (<span>3</span>)</a>
+        </div>
+        <div class="col-7">
+          <span class="ans_tag">Tags:</span>
+          <a class="ans_tag" href="">black-jack bender</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr/>
   {% include 'inc/one_answer.html' %}
-      <hr/>
-
-        <div class="form-group">
+  {% include 'inc/one_answer.html' %}
+  <hr/>
+  <div class="form-group">
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Enter your answer here"></textarea>
-  </div> 
-      
+  </div>
 {% endblock content %}
- {% block button %}
- <div class="container">
-  <div class="row">
-  <div class="col">
-<button type="button" class="but btn but_save btn-outline-secondary">Answer</button>
-</div>
-</div>
-</div>
-
- {% endblock button %}
+{% block button %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <button type="button" class="but btn but_save btn-outline-secondary">Answer</button>
+      </div>
+    </div>
+  </div>
+{% endblock button %}

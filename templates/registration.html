@@ -1,47 +1,48 @@
 {% extends 'inc/base.html' %}
 {% load static %}
- {% block heading %}
-<div class="row row_quest">
-    <span id="new" class="nq">Log In</span>
-     </div>
- {% endblock heading %}
+{% block profile %}
+  {% include 'inc/navbar_no_profile.html' %}
+{% endblock profile %}
+{% block heading %}
+  <div class="row row_quest">
+    <span id="new" class="nq">Registration</span>
+  </div>
+{% endblock heading %}
 {% block content %}
-    <form>
-       <div class="form-group">
-    <label for="exampleInputLogin">Login</label>
-    <input type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp">
-  </div>
-
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputNick">NickName</label>
-    <input type="text" class="form-control" id="exampleInputNick" aria-describedby="emailHelp">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
+  <form>
     <div class="form-group">
-    <label for="exampleInputPassword2">Repeat password</label>
-    <input type="password" class="form-control" id="exampleInputPassword2">
+      <label for="exampleInputLogin">Login</label>
+      <input type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputNick">NickName</label>
+      <input type="text" class="form-control" id="exampleInputNick" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword2">Repeat password</label>
+      <input type="password" class="form-control" id="exampleInputPassword2">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Upload avatar</label>
+      <input type="file" class="form-control-file file_ad" id="exampleFormControlFile1">
+    </div>
+  </form>
+{% endblock content %}
+{% block button %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <button type="button" class="but btn but_save btn-outline-secondary">Register!</button>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Upload avatar</label>
-    <input type="file" class="form-control-file file_ad" id="exampleFormControlFile1">
-  </div>
-
-</form>
-    {% endblock content %}
-  {% block button %}
- <div class="container">
-  <div class="row">
-  <div class="col">
-<button type="button" class="but btn but_save btn-outline-secondary">Register!</button>
-</div>
-</div>
-</div>
-  {% endblock button %}
+{% endblock button %}

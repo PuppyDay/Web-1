@@ -1,7 +1,17 @@
 from django.shortcuts import render
 
+questions = [
+    {
+        'id': idx,
+        'title': 'title{idx}',
+        'text': 'text text',
+    } for idx in range(10)
+]
+
 def index(request):
-	return render(request, 'index.html', {})
+	return render(request, 'index.html', {
+		'questions':questions,
+		})
 
 def add_question(request):
 	return render(request, 'add_question.html', {})

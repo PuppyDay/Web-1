@@ -28,5 +28,5 @@ urlpatterns = [
      path('templates/log_in.html', views.log_in),
      path('templates/profile.html', views.profile),
      path('templates/question_by_tag.html', views.question_by_tag),
-     path('templates/answer/<int:pk>.html', views.answer),
+     path('templates/answer.html', views.answer),
 ]

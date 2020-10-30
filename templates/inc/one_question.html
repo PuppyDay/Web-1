@@ -1,22 +1,24 @@
-   {% load static %}
-     <div class="row question-box">
-        <div class="col-3">
-          <img src="{% static "img/123.jpg" %}" class="question-img" alt="avatar">
-          <div class="row">
-            <input type="number" name="number" class="number" placeholder="1">
-          </div>
+{% load static %}
+<div class="row question-box">
+  <div class="col-3">
+    <img src="{% static "img/123.jpg" %}" class="question-img" alt="avatar">
+    <div class="row">
+      <input type="number" name="number" class="number" placeholder="1">
+    </div>
+  </div>
+  <div class="col-9">
+    {% block question %}
+      <div class="question-title"><a class="text-dark" href="">How to build a moon park?</a></div>
+      <div class="question-text">Guys, i have trouble with a moon park. Can't find the black-jack...</div>
+      <div class="row">
+        <div class="col-5">
+          <a class="ans_tag" href="">answer (<span>3</span>)</a>
         </div>
-         <div class="col-9">
-           <div class="question-title"><a class="text-dark" href="">How to build a moon park?</a></div>
-           <div class="question-text">Guys, i have trouble with a moon park. Can't find the black-jack...</div>
-            <div class="row">
-           <div class="col-5">
-             <a class="ans_tag" href="">answer (<span>3</span>)</a>
-           </div>
-           <div class="col-7">
-             <span class="ans_tag">Tags:</span>
-             <a class="ans_tag" href="question_by_tag.html">black-jack bender</a>
-           </div>
-         </div>
-         </div>
+        <div class="col-7">
+          <span class="ans_tag">Tags:</span>
+          <a class="ans_tag" href="question_by_tag.html">black-jack bender</a>
+        </div>
       </div>
+    {% endblock question %}
+  </div>
+</div>

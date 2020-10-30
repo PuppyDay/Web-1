@@ -1,43 +1,35 @@
 {% extends 'inc/base.html' %}
 {% load static %}
- {% block heading %}
-<div class="row row_quest">
+{% block profile %}
+  {% include 'inc/navbar_no_profile.html' %}
+{% endblock profile %}
+{% block heading %}
+  <div class="row row_quest">
     <span id="new" class="nq">New Question</span>
-     </div>
- {% endblock heading %}
+  </div>
+{% endblock heading %}
 {% block content %}
-      <form>
-
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Title</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="How to build a moon park?">
-  </div>
-  
-
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Text</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="Guys, i have trouble with a moon park. Can't find the black-jack..."></textarea>
-  </div>
-
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Tags</label>
-    <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="black-jack bender">
-  </div>
-  
-
-</form>
+  <form>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Title</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="How to build a moon park?">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Text</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="Guys, i have trouble with a moon park. Can't find the black-jack..."></textarea>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Tags</label>
+      <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="black-jack bender">
+    </div>
+  </form>
 {% endblock content %}
-
-    {% block button %}
-     <div class="container">
-  <div class="row">
-  <div class="col">
-<button type="button" class="but btn btn-outline-secondary">ASK!</button>
-</div>
-</div>
-</div>
+{% block button %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <button type="button" class="but btn btn-outline-secondary">ASK!</button>
+      </div>
+    </div>
+  </div>
 {% endblock button %}
-
-
-   
-  

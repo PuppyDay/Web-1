@@ -1,14 +1,11 @@
 {% extends 'inc/base.html' %}
 {% load static %}
 {% block heading %}
-  <div class="row row_quest">
-    <span id="new">Tag: bender</span>
-  </div>
-
-
-
-  {% endblock heading %}
+	<div class="row row_quest">
+		<span id="new">Tag: bender</span>
+	</div>
+{% endblock heading %}
 {% block content %}
- {% include 'inc/one_question.html' %}
-  {% include 'inc/one_question.html' %}
-   {% endblock content %}
+	{% include 'inc/one_question.html' %}
+	{% include 'inc/one_question.html' %}
+{% endblock content %}
