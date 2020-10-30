@@ -26,5 +26,5 @@ urlpatterns = [
      path('login/', views.log_in, name='login'),
      path('profile/', views.profile, name='profile'),
      path('tag/', views.question_by_tag, name='tag'),
-     path('question/', views.answer, name='question'),
+     path('question/<int:pk>/', views.answer, name='question'),
 ]

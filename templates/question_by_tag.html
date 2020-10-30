@@ -6,6 +6,7 @@
 	</div>
 {% endblock heading %}
 {% block content %}
-	{% include 'inc/one_question.html' %}
-	{% include 'inc/one_question.html' %}
+	{% for question in questions %}
+		{% include 'inc/one_question.html' %}
+	{% endfor %}
 {% endblock content %}

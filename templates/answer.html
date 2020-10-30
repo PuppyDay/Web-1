@@ -14,15 +14,16 @@
       </div>
     </div>
     <div class="col-9">
-      <div class="question-title"><a class="text-dark" href="">How to build a moon park?</a></div>
-      <div class="question-text">Guys, i have trouble with a moon park. Can't find the black-jack...</div>
+      <div class="question-title"><a class="text-dark" href="{% url 'question' question.id %}">{{ question.title }}</a></div>
+      <div class="question-text">{{ question.text }}</div>
       <div class="row">
         <div class="col-5">
-          <a class="ans_tag" href="">answer (<span>3</span>)</a>
+          <a class="ans_tag" href="{% url 'question' question.id %}">answer (<span>3</span>)</a>
         </div>
         <div class="col-7">
           <span class="ans_tag">Tags:</span>
-          <a class="ans_tag" href="">black-jack bender</a>
+          <a class="ans_tag" href="{% url 'tag' %}">black-jack</a>
+          <a class="ans_tag" href="{% url 'tag' %}">bbender</a>
         </div>
       </div>
     </div>
