@@ -1,0 +1,43 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% block heading %}
+  <div class="row row_quest">
+    <span id="new" class="prof_head ">Settings: Ninel'</span>
+  </div>
+
+ {% endblock heading %}
+{% block content %}
+
+      <form>
+          <div class="form-group">
+    <label for="exampleInputLogin">Login</label>
+    <input type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp">
+     </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+
+   <div class="form-group">
+    <label for="exampleInputNick">NickName</label>
+    <input type="text" class="form-control" id="exampleInputNick" aria-describedby="emailHelp">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Upload avatar</label>
+      <img class="def_av" src="{% static "img/def_avatar.jpg" %}" alt="avatar">
+    <input type="file" class="form-control-file file_ad" id="exampleFormControlFile1">
+  </div>
+ 
+</form>
+    
+   {% endblock content %}
+    {% block button %}
+
+<div class="container">
+<button type="button" class="but btn btn-outline-secondary">Save</button>
+</div>
+
+ {% endblock button %}

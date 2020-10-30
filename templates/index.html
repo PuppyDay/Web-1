@@ -1,0 +1,13 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% block heading %}
+	<div class="row row_quest">
+		<a class="text-dark" href="templates/add_question.html" id="new">New Questions</a>
+		<a class="text-dark" id="hot" href="">Hot Questions</a>
+	</div>
+{% endblock heading %}
+{% block content %}
+		{% include 'inc/one_question.html' %}
+		{% include 'inc/one_question.html' %}
+{% endblock content %}
+    

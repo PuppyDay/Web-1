@@ -1,0 +1,78 @@
+{%load static%}
+
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>AskNinel'</title>
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/my.css" %}"rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "img/logo.ico" %}">
+  </head>
+  <body class="d-flex flex-column h-100">
+    {% include 'inc/navbar.html' %}
+
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+<div class="container">
+   {% block heading %}
+     {% endblock heading %}
+
+ <div class="row">
+    <div class="col">
+     {% block content %}
+     {% endblock content %}
+    </div>
+
+
+
+   
+    <div class="col-4 right">
+      <div>
+        <span class="popular_best">Popular Tags</span>
+        <div>
+          <a class="a_r_t" href="">perl</a>
+           <a class="a_r_t" href="">MySQL</a>
+            <a class="a_r_t" href="">django</a>
+        </div>
+      </div>
+      <div >
+        <span class="popular_best">Best Members</span>
+        <div>
+        <a class="a_right" href="">Mr.Freeman</a><br>
+        <a class="a_right" href="">Dr.House</a><br>
+        <a class="a_right" href="">Bender</a><br>
+        <a class="a_right" href="">Queen Victoria</a>
+      </div>
+      </div>
+    </div>
+
+</div>
+
+ 
+</div>
+
+ {% block button %}
+ <div class="container">
+  <div class="row">
+  <div class="col">
+<button type="button" class="but btn btn-outline-secondary">1</button>
+</div>
+</div>
+</div>
+  {% endblock button %}
+
+
+
+</main>
+<!-- footer -->
+<footer class="footer mt-auto py-3">
+</footer>
+<script src="js/jquery.slim.min.js"></script>
+<script src="js/popper.min.js" ></script>
+<script src="js/bootstrap.min.js"></script>
+      </body>
+</html>

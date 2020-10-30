@@ -1,0 +1,158 @@
+main > .container {
+  padding: 60px 15px 0;
+  width: 4000px;
+}
+
+code {
+  font-size: 80%;
+}
+
+nav {
+	height: 100px;
+	background: #DCDCDC;
+}
+
+#avatar_image {
+	max-width: 120px;
+	max-height: 90px;
+	margin: 5px;
+	border: 1px solid grey;
+	margin-right: 25px;
+}
+
+#number {
+	width: 50px;
+	margin-top: 30px;
+	margin-left: 46px;
+	text-align: center;
+	border: 1px solid grey;
+}
+
+.number {
+	width: 50px;
+	margin-top: 30px;
+	margin-left: 46px;
+	text-align: center;
+	border: 1px solid grey;
+}
+
+.footer {
+	background: #DCDCDC;
+}
+
+.profile_info {
+	display: flex;
+	flex-direction: column;
+}
+
+#name {
+	font-size: 25px;
+}
+
+.a_prof {
+	margin-left: 25px;
+}
+
+.navbar-brand {
+	font-size: 50px;
+}
+
+.search {
+	margin-left: 250px;
+}
+
+#new {
+	font-size: 40px;
+	margin-top: 80px;
+}
+
+#hot {
+	font-size: 25px;
+	margin-left: 60px;
+	margin-top: 95px;
+}
+
+.question-img {
+	max-width: 120px;
+	max-height: 120px;
+	border: 1px solid grey;
+}
+
+.question-box {
+	margin-top: 30px;
+	border: 1px solid grey;
+	border-radius: 3px;
+	padding: 20px;
+	background-color:  #f5f5f5;
+}
+
+.question-title {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.question-text {
+	margin-bottom: 40px;
+}
+
+.but {
+	margin-top: 30px;
+	background-color:  #f5f5f5;
+	box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+}
+
+.popular_best {
+	font-size: 40px;
+}
+
+.right {
+	margin-left: 50px;
+}
+
+.a_r_t {
+	color: red;
+}
+
+.in_register {
+	font-size: 30px;
+	margin-right: 50px;
+}
+
+.nq {
+	margin-bottom: 30px;
+}
+
+.ans_head {
+	margin-bottom: 160px;
+	margin-top: 160px;
+}
+
+.im_main {
+	max-width: 160px;
+	max-height: 160px;
+}
+
+.box_main {
+	background-color: #c2c2c2;
+	border-radius: 10px;
+}
+
+.def_av {
+	max-width: 160px;
+	max-height: 160px;
+	margin-left: 60px;
+}
+
+.prof_head {
+		margin-bottom: 30px;
+}
+
+.file_ad {
+	margin-left: 160px;
+	margin-top: 30px;
+}
+
+.but_save {
+	margin-bottom: 30px;
+}
+
