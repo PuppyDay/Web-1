@@ -20,13 +20,15 @@
       <input type="password" class="form-control" id="exampleInputPassword1">
     </div>
   </form>
-  <a href="">create new account</a>
+  <a href="{% url 'signup' %}">create new account</a>
 {% endblock content %}
 {% block button %}
   <div class="container">
     <div class="row">
       <div class="col">
-        <button type="button" class="but btn btn-outline-secondary">Log in!</button>
+        <a href="{% url 'index' %}">
+          <button type="button" class="but btn btn-outline-secondary">Log in!</button>
+        </a>
       </div>
     </div>
   </div>

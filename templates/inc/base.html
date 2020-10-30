@@ -15,7 +15,7 @@
     <header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md fixed-top">
-        <a class="navbar-brand text-dark" href="index.html">AscNinel'</a>
+        <a class="navbar-brand text-dark" href="{% url 'index' %}">AscNinel'</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <form class="search form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -29,8 +29,8 @@
             <div class="profile_info">
               <span id="name">Ninel'</span>
               <div class="row_1">
-                <a  href="profile.html">settings</a>
-                <a class="a_prof" href="">log out</a>
+                <a  href="{% url 'profile' %}">settings</a>
+                <a class="a_prof" href="{% url 'login' %}">log out</a>
               </div>
             </div>
           {% endblock profile %}
@@ -52,9 +52,9 @@
             <div>
               <span class="popular_best">Popular Tags</span>
               <div>
-                <a class="a_r_t" href="">perl</a>
-                <a class="a_r_t" href="">MySQL</a>
-                <a class="a_r_t" href="">django</a>
+                <a class="a_r_t" href="{% url 'tag' %}">perl</a>
+                <a class="a_r_t" href="{% url 'tag' %}">MySQL</a>
+                <a class="a_r_t" href="{% url 'tag' %}">django</a>
               </div>
             </div>
             <div >

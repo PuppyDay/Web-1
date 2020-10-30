@@ -12,11 +12,11 @@
       <div class="question-text">Guys, i have trouble with a moon park. Can't find the black-jack...</div>
       <div class="row">
         <div class="col-5">
-          <a class="ans_tag" href="">answer (<span>3</span>)</a>
+          <a class="ans_tag" href="{% url 'question' %}">answer (<span>3</span>)</a>
         </div>
         <div class="col-7">
           <span class="ans_tag">Tags:</span>
-          <a class="ans_tag" href="question_by_tag.html">black-jack bender</a>
+          <a class="ans_tag" href="{% url 'tag' %}">black-jack bender</a>
         </div>
       </div>
     {% endblock question %}
