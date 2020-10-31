@@ -22,13 +22,14 @@
         </div>
         <div class="col-7">
           <span class="ans_tag">Tags:</span>
-          <a class="ans_tag" href="{% url 'tag' %}">black-jack</a>
-          <a class="ans_tag" href="{% url 'tag' %}">bbender</a>
+          <a class="ans_tag" href="{% url 'tag' tags.tag_1  %}">{{ tags.tag_1 }}</a>
+          <a class="ans_tag" href="{% url 'tag' tags.tag_2  %}">{{ tags.tag_2 }}</a>
         </div>
       </div>
     </div>
   </div>
   <hr/>
+  {% include 'inc/one_answer.html' %}
   {% include 'inc/one_answer.html' %}
   {% include 'inc/one_answer.html' %}
   <hr/>

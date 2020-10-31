@@ -16,8 +16,8 @@
         </div>
         <div class="col-7">
           <span class="ans_tag">Tags:</span>
-          <a class="ans_tag" href="{% url 'tag' %}">black-jack </a>
-          <a class="ans_tag" href="{% url 'tag' %}">bender</a>
+          <a class="ans_tag" href="{% url 'tag' tags.tag_1  %}">{{ tags.tag_1 }}</a>
+          <a class="ans_tag" href="{% url 'tag' tags.tag_2  %}">{{ tags.tag_2 }}</a>
         </div>
       </div>
     {% endblock question %}
