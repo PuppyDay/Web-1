@@ -57,9 +57,9 @@ def question_by_tag(request, string):
     return render(request, 'question_by_tag.html', context=context)
 
 def answer(request, pk):
-	question = questions[pk]
-	return render(request, 'answer.html', {
-        'question': question,
-	})
+    question = questions[pk]
+    context = paginate(request, questions, 3)
+    context['question'] = question
+    return render(request, 'answer.html', context=context)
 
  
