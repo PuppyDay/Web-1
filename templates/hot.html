@@ -7,7 +7,7 @@
 	</div>
 {% endblock heading %}
 {% block content %}
-	{% for question in questions %}
+	{% for question in questions.object_list %}
 		{% include 'inc/one_question.html' %}
 	{% endfor %}
 {% endblock content %}

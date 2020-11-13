@@ -5,7 +5,23 @@ def paginate(request, object_list, per_page=5):
     paginator= Paginator(object_list, per_page)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
-    return page
+    is_paginated = page.has_other_pages()
+    if page.has_previous():
+        prev_url = '?page={}'.format(page.previous_page_number())
+    else:
+        prev_url = ''
+
+    if page.has_next():
+        next_url = '?page={}'.format(page.next_page_number())
+    else:
+        next_url = ''
+    context = {
+        'questions': page,
+        'is_paginated': is_paginated,
+        'next_url': next_url,
+        'prev_url': prev_url
+    }
+    return context
 
 questions = [
     {
@@ -16,15 +32,12 @@ questions = [
 ]
 
 def index(request):
-    page = paginate(request, questions)
-    return render(request, 'index.html', {
-        'questions': page,
-    })
+    context = paginate(request, questions)
+    return render(request, 'index.html', context=context)
 
 def hot(request):
-	return render(request, 'hot.html', {
-        'questions': questions,
-    })
+    context = paginate(request, questions)
+    return render(request, 'hot.html', context=context)
 
 def add_question(request):
 	return render(request, 'add_question.html', {})
@@ -39,13 +52,14 @@ def profile(request):
 	return render(request, 'profile.html', {})
 
 def question_by_tag(request, string):
-	return render(request, 'question_by_tag.html', {
-        'questions': questions,
-        'string':string,
-	})
+    context = paginate(request, questions)
+    context['string'] = string
+    return render(request, 'question_by_tag.html', context=context)
 
 def answer(request, pk):
 	question = questions[pk]
 	return render(request, 'answer.html', {
         'question': question,
 	})
+
+ 
