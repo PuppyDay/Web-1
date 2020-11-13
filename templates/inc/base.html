@@ -70,28 +70,7 @@
         </div>
       </div>
       {% block button %}
-        <div class="container">
-          <div class="row">
-            <div class="col">
-
-               {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first &nbsp; </a>
-            <a href="?page={{ page_obj.previous_page_number }}"><button type="button" class="but pag btn btn-outline-secondary">1</button></a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}&nbsp;
-        </span>
-
-        {% if page_obj.has_next %}
-
-            <a href="?page={{ page_obj.next_page_number }}"> <button type="button" class="but pag btn btn-outline-secondary">2</button></a>
-            <a href="?page={{ page_obj.paginator.num_pages }}"> last &raquo;</a>
-        {% endif %}
-
-            </div>
-          </div>
-        </div>
+         {% include 'inc/paginator.html' %}
       {% endblock button %}
     </main>
     <!-- footer -->

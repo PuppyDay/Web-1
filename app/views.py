@@ -2,24 +2,23 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 
 def paginate(request, object_list, per_page=5):
-    paginator = Paginator(object_list, 5)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return page_obj
+    paginator= Paginator(object_list, per_page)
+    page_number = request.GET.get('page', 1)
+    page = paginator.get_page(page_number)
+    return page
 
 questions = [
     {
         'id': idx,
         'title': f'{idx}. How to build a moon park?',
         'text': f'Guys, i have trouble with a moon park. Can\'t find the black-jack... It\'s text number {idx}!',
-    } for idx in range(10)
+    } for idx in range(50)
 ]
 
 def index(request):
-    page_obj = paginate(request, questions)
+    page = paginate(request, questions)
     return render(request, 'index.html', {
-        'questions': questions,
-        'page_obj': page_obj,
+        'questions': page,
     })
 
 def hot(request):
