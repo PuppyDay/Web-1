@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <form class="search form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <a href="{% url 'ask' %}"><button class="btn btn-outline-success my-2 my-sm-0" type="button">ASK</button></a>
           </form>
         </div>
         <div class="profile"></div>
@@ -73,7 +73,22 @@
         <div class="container">
           <div class="row">
             <div class="col">
-              <button type="button" class="but btn btn-outline-secondary">1</button>
+
+               {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first &nbsp; </a>
+            <a href="?page={{ page_obj.previous_page_number }}"><button type="button" class="but pag btn btn-outline-secondary">1</button></a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}&nbsp;
+        </span>
+
+        {% if page_obj.has_next %}
+
+            <a href="?page={{ page_obj.next_page_number }}"> <button type="button" class="but pag btn btn-outline-secondary">2</button></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}"> last &raquo;</a>
+        {% endif %}
+
             </div>
           </div>
         </div>

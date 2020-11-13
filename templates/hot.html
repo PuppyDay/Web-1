@@ -2,8 +2,8 @@
 {% load static %}
 {% block heading %}
 	<div class="row row_quest">
-		<span class="text-dark" id="new">New Questions</span>
-		<a class="text-dark" id="hot" href="{% url 'hot' %}">Hot Questions</a>
+		<span class="text-dark" id="new">Hot Questions</span>
+		<a class="text-dark" id="hot" href="{% url 'index' %}">New Questions</a>
 	</div>
 {% endblock heading %}
 {% block content %}

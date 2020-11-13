@@ -9,9 +9,11 @@
   <div class="row question-box box_main">
     <div class="col-3">
       <img src="{% static "img/123.jpg" %}" class="question-img im_main" alt="avatar">
-      <div class="row">
-        <input type="number" name="number" class="number" placeholder="1">
-      </div>
+      <div class="row row_like">
+      <div><button class="like_dis btn btn-primary btn-sm btn-light"><img src="{% static "img/like.jpg" %}" height="5" ></button></div>
+      <span class="number m">1</span>
+     <div><button class="like_dis btn btn-primary btn-sm btn-light"><img src="{% static "img/dis.jpg" %}" height="5" ></button></div>
+    </div>
     </div>
     <div class="col-9">
       <div class="question-title"><a class="text-dark" href="{% url 'question' question.id %}">{{ question.title }}</a></div>

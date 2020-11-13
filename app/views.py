@@ -1,4 +1,11 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
+
+def paginate(request, object_list, per_page=5):
+    paginator = Paginator(object_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return page_obj
 
 questions = [
     {
@@ -9,7 +16,14 @@ questions = [
 ]
 
 def index(request):
-	return render(request, 'index.html', {
+    page_obj = paginate(request, questions)
+    return render(request, 'index.html', {
+        'questions': questions,
+        'page_obj': page_obj,
+    })
+
+def hot(request):
+	return render(request, 'hot.html', {
         'questions': questions,
     })
 

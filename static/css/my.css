@@ -20,20 +20,24 @@ nav {
 	margin-right: 25px;
 }
 
-#number {
-	width: 50px;
-	margin-top: 30px;
-	margin-left: 46px;
+.number {
+	width: 40px;
+	margin-top: 25px;
 	text-align: center;
 	border: 1px solid grey;
+	padding-top: 2px;
+	background-color: white;
 }
 
-.number {
-	width: 50px;
-	margin-top: 30px;
-	margin-left: 46px;
-	text-align: center;
+.like_dis{
 	border: 1px solid grey;
+	margin-top: 25px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.row_like {
+	margin-left: 5px;
 }
 
 .footer {
