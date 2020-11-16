@@ -52,18 +52,17 @@
             <div>
               <span class="popular_best">Popular Tags</span>
               <div>
-                <a class="a_r_t" href="{% url 'tag' tags.tag_3  %}">{{ tags.tag_3 }}</a>
-                <a class="a_r_t" href="{% url 'tag' tags.tag_4  %}">{{ tags.tag_4 }}</a>
-                <a class="a_r_t" href="{% url 'tag' tags.tag_5  %}">{{ tags.tag_5 }}</a>
+                {% for tag in tags %}
+            <a class="a_r_t" href="{% url 'tag' tag  %}">{{ tag }}</a>
+                {% endfor %}
               </div>
             </div>
             <div >
               <span class="popular_best">Best Members</span>
               <div>
-                <a class="a_right" href="">Mr.Freeman</a><br>
-                <a class="a_right" href="">Dr.House</a><br>
-                <a class="a_right" href="">Bender</a><br>
-                <a class="a_right" href="">Queen Victoria</a>
+                 {% for member in members %}
+            <a class="a_right" href="">{{ member }}</a><br/>
+                {% endfor %}
               </div>
             </div>
           </div>

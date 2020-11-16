@@ -10,9 +10,9 @@
     <div class="col-3">
       <img src="{% static "img/123.jpg" %}" class="question-img im_main" alt="avatar">
       <div class="row row_like">
-        <div><button class="like_dis btn btn-primary btn-sm btn-light"><img src="{% static "img/like.jpg" %}" height="5" ></button></div>
-        <span class="number m">1</span>
-        <div><button class="like_dis btn btn-primary btn-sm btn-light"><img src="{% static "img/dis.jpg" %}" height="5" ></button></div>
+        <div><button class="like_dis btn btn-primary btn-sm btn-light">&uarr;</button></div>
+        <span class="number m">{{ question.number_of_likes }}</span>
+        <div><button class="like_dis btn btn-primary btn-sm btn-light">&darr;</button></div>
       </div>
     </div>
     <div class="col-9">
@@ -20,12 +20,13 @@
       <div class="question-text">{{ question.text }}</div>
       <div class="row">
         <div class="col-5">
-          <a class="ans_tag" href="{% url 'question' question.id %}">answer (<span>3</span>)</a>
+          <a class="ans_tag" href="{% url 'question' question.id %}">answer (<span>{{question.count_answers}}</span>)</a>
         </div>
         <div class="col-7">
           <span class="ans_tag">Tags:</span>
-          <a class="ans_tag" href="{% url 'tag' tags.tag_1  %}">{{ tags.tag_1 }}</a>
-          <a class="ans_tag" href="{% url 'tag' tags.tag_2  %}">{{ tags.tag_2 }}</a>
+          {% for tag in question.tags.all_tags %}
+            <a class="a_r_t" href="{% url 'tag' tag  %}">{{ tag }}</a>
+        {% endfor %}
         </div>
       </div>
     </div>

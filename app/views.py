@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from app.models import Article, User, Answer
+
 
 def paginate(request, object_list, per_page=5):
-    paginator= Paginator(object_list, per_page)
+    paginator = Paginator(object_list, per_page)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
     is_paginated = page.has_other_pages()
@@ -23,43 +25,55 @@ def paginate(request, object_list, per_page=5):
     }
     return context
 
+
 questions = [
     {
         'id': idx,
         'title': f'{idx}. How to build a moon park?',
         'text': f'Guys, i have trouble with a moon park. Can\'t find the black-jack... It\'s text number {idx}!',
+        'likes': 10,
     } for idx in range(50)
 ]
 
+
 def index(request):
-    context = paginate(request, questions)
+    new_articles = Article.objects.sort_new()
+    context = paginate(request, new_articles)
     return render(request, 'index.html', context=context)
 
+
 def hot(request):
-    context = paginate(request, questions)
+    hot_articles = Article.objects.sort_hot()
+    context = paginate(request, hot_articles)
     return render(request, 'hot.html', context=context)
 
+
 def add_question(request):
-	return render(request, 'add_question.html', {})
+    return render(request, 'add_question.html', {})
+
 
 def registration(request):
-	return render(request, 'registration.html', {})
+    return render(request, 'registration.html', {})
+
 
 def log_in(request):
-	return render(request, 'log_in.html', {})
+    return render(request, 'log_in.html', {})
+
 
 def profile(request):
-	return render(request, 'profile.html', {})
+    return render(request, 'profile.html', {})
+
 
 def question_by_tag(request, string):
-    context = paginate(request, questions)
+    article_tag = Article.objects.sort_questions_by_tag(string)
+    context = paginate(request, article_tag)
     context['string'] = string
     return render(request, 'question_by_tag.html', context=context)
 
+
 def answer(request, pk):
-    question = questions[pk]
-    context = paginate(request, questions, 3)
+    question = Article.objects.get(id=pk)
+    all_answer = Answer.objects.question_answers(pk)
+    context = paginate(request, all_answer, 3)
     context['question'] = question
     return render(request, 'answer.html', context=context)
-
- 
