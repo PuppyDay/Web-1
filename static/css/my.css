@@ -89,10 +89,6 @@ nav {
 	border-radius: 3px;
 	padding: 20px;
 	background-color:  #f5f5f5;
-	white-space: nowrap;
-    overflow: hidden;
-	text-overflow: ellipsis;
-    transition: all .5s;
 }
 
 .question-title {

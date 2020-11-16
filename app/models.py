@@ -6,6 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 class Author(models.Model):
     name = models.CharField(max_length=256, verbose_name='Имя')
     email = models.EmailField(verbose_name='email', default='aaa@mail.ru')
+    image = models.ImageField(upload_to='static/img/', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -93,6 +94,9 @@ class Article(models.Model):
     def count_answers(self):
         return Answer.objects.question_answers(self.pk).count()
 
+    def author_img(self):
+        return self.author.author.image
+
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
@@ -113,6 +117,9 @@ class Answer(models.Model):
     number_of_likes = models.IntegerField(verbose_name='Рейтинг', default=0)
 
     objects = AnswerManager()
+
+    def author_img(self):
+        return self.author.author.image
 
     def __str__(self):
         return self.text

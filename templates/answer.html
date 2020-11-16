@@ -1,5 +1,4 @@
 {% extends 'inc/base.html' %}
-{% load static %}
 {% block heading %}
   <div class="row row_quest">
     <span id="new"></span>
@@ -8,7 +7,7 @@
 {% block content %}
   <div class="row question-box box_main">
     <div class="col-3">
-      <img src="{% static "img/123.jpg" %}" class="question-img im_main" alt="avatar">
+      <img src="../../{{ question.author_img }}" class="question-img im_main" alt="avatar">
       <div class="row row_like">
         <div><button class="like_dis btn btn-primary btn-sm btn-light">&uarr;</button></div>
         <span class="number m">{{ question.number_of_likes }}</span>
