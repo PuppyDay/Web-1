@@ -54,11 +54,11 @@ class LikeDislike(models.Model):
         (LIKE, 'Нравится')
     )
 
-    vote = models.SmallIntegerField(verbose_name='Голос', choices=VOTES)
-    user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Автор')
+    vote = models.SmallIntegerField(verbose_name='Голос', choices=VOTES, default=0)
+    user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Автор', default=0)
 
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, default=0)
+    object_id = models.PositiveIntegerField(default=0)
     content_object = GenericForeignKey()
 
     class Meta:
@@ -83,8 +83,8 @@ class Article(models.Model):
     date_create = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     author = models.ForeignKey('User', on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True)
-    marks = GenericRelation(LikeDislike)
     number_of_likes = models.IntegerField(verbose_name='Рейтинг', default=0)
+    marks = GenericRelation(LikeDislike)
 
     objects = ArticleManager()
 
@@ -113,8 +113,8 @@ class Answer(models.Model):
     question = models.ForeignKey('Article', on_delete=models.CASCADE, verbose_name='Вопрос')
     is_correct = models.BooleanField(default=False, verbose_name='Верно')
     date_create = models.DateField(auto_now_add=True, verbose_name='Дата создания')
-    marks = GenericRelation(LikeDislike)
     number_of_likes = models.IntegerField(verbose_name='Рейтинг', default=0)
+    marks = GenericRelation(LikeDislike)
 
     objects = AnswerManager()
 

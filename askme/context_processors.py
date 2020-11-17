@@ -2,7 +2,7 @@ from app.models import Tag, User
 
 
 def default_tag(arg):
-    tags = Tag.objects.all_tags()
+    tags = Tag.objects.all_tags()[:6]
     return {'tags': tags}
 
 
