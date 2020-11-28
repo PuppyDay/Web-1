@@ -54,7 +54,7 @@ class LikeDislike(models.Model):
     class Meta:
         verbose_name = 'Лайк'
         verbose_name_plural = 'Лайки'
-        unique_together = ('user', 'content_type', 'object_id', )
+        unique_together = ('user', 'object_id', )
 
 
 class ArticleManager(models.Manager):
@@ -110,7 +110,7 @@ class Answer(models.Model):
     objects = AnswerManager()
 
     def author_img(self):
-        return self.author.author.image
+        return self.author.image
 
     def __str__(self):
         return self.text

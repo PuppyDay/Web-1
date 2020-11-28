@@ -4,8 +4,11 @@ from random import choice
 from faker import Faker
 from django.db import IntegrityError
 
+# TODO:чтоб не крашилось при не уникальных лайках и дизах
+
 f = Faker()
 user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+
 
 class Command(BaseCommand):
     help = 'Generates Data'
@@ -21,7 +24,6 @@ class Command(BaseCommand):
         parser.add_argument('--add_questions', type=int, help='questions creation')
         parser.add_argument('--add_answers', type=int, help='answers creation')
 
-
     def handle(self, *args, **options):
         opt = options['db_size']
         if (opt):
@@ -30,7 +32,7 @@ class Command(BaseCommand):
                 'small': 0.0005,
                 'medium': 0.001,
                 'large': 0.01,
-                }.get(opt, 0.00005)
+            }.get(opt, 0.00005)
             self.generate_database(part)
 
         if (options['add_users']):
@@ -66,7 +68,7 @@ class Command(BaseCommand):
     def generate_auth_users(self, count):
         num = f.random_int(min=1, max=1000)
         for i in range(count):
-            User.objects.create_user(f.unique.first_name()+f'{num}', f.email(),
+            User.objects.create_user(f.unique.first_name() + f'{num}', f.email(),
                                      f.password(length=f.random_int(min=8, max=15)))
 
     def generate_users(self, cnt):
@@ -78,9 +80,8 @@ class Command(BaseCommand):
             profile = Author.objects.create(
                 name=name_help,
                 image=f'static/img/test{num_ava}.jpg',
-                user_id=users_ids[i + len(users_ids)-cnt]
+                user_id=users_ids[i + len(users_ids) - cnt]
             )
-
 
     def generate_tags(self, cnt):
         for i in range(cnt):
