@@ -1,4 +1,4 @@
-from app.models import Tag, User
+from app.models import Tag, Author
 
 
 def default_tag(arg):
@@ -7,5 +7,5 @@ def default_tag(arg):
 
 
 def default_members(arg):
-    members = User.objects.all()[:3]
+    members = Author.objects.all()[:5]
     return {'members': members}

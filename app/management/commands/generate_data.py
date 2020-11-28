@@ -5,7 +5,7 @@ from faker import Faker
 from django.db import IntegrityError
 
 f = Faker()
-
+user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
 class Command(BaseCommand):
     help = 'Generates Data'
@@ -20,7 +20,7 @@ class Command(BaseCommand):
         parser.add_argument('--add_tags', type=int, help='tags creation')
         parser.add_argument('--add_questions', type=int, help='questions creation')
         parser.add_argument('--add_answers', type=int, help='answers creation')
-        # parser.add_argument('--add_marks', type=int, help='marks creation')
+
 
     def handle(self, *args, **options):
         opt = options['db_size']
@@ -54,7 +54,7 @@ class Command(BaseCommand):
         self.generate_questions(int(MAX_QUESTION * part))
 
     def generate_marks(self, mark_object):
-        users_ids = User.objects.values_list(
+        users_ids = Author.objects.values_list(
             'id', flat=True
         )
         LikeDislike.objects.create(
@@ -63,18 +63,24 @@ class Command(BaseCommand):
             user_id=choice(users_ids),
         )
 
+    def generate_auth_users(self, count):
+        num = f.random_int(min=1, max=1000)
+        for i in range(count):
+            User.objects.create_user(f.unique.first_name()+f'{num}', f.email(),
+                                     f.password(length=f.random_int(min=8, max=15)))
+
     def generate_users(self, cnt):
+        self.generate_auth_users(cnt)
+        users_ids = list(User.objects.values_list("id", flat=True))
         for i in range(cnt):
-            num_ava = f.random_int(min=1, max=10)
+            num_ava = f.random_int(min=1, max=18)
             name_help = f.name()
             profile = Author.objects.create(
                 name=name_help,
-                email=name_help + "@mail.ru",
-                image=f'static/img/test{num_ava}.jpg'
+                image=f'static/img/test{num_ava}.jpg',
+                user_id=users_ids[i + len(users_ids)-cnt]
             )
-            User.objects.create(
-                author_id=profile.id
-            )
+
 
     def generate_tags(self, cnt):
         for i in range(cnt):
@@ -86,7 +92,7 @@ class Command(BaseCommand):
         tags_ids = Tag.objects.values_list(
             'id', flat=True
         )
-        users_ids = User.objects.values_list(
+        users_ids = Author.objects.values_list(
             'id', flat=True
         )
         added_questions_ids = []
@@ -101,7 +107,7 @@ class Command(BaseCommand):
             for j in range(f.random_int(min=1, max=5)):
                 question.tags.add(choice(tags_ids))
 
-        self.fill_questions_with_answers(cnt * 2, added_questions_ids)
+        self.fill_questions_with_answers(cnt * 5, added_questions_ids)
 
     def fill_questions_with_answers(self, cnt, question_ids):
         if len(question_ids) == 0:
@@ -109,7 +115,7 @@ class Command(BaseCommand):
                 'id', flat=True
             )
 
-        users_ids = User.objects.values_list(
+        users_ids = Author.objects.values_list(
             'id', flat=True
         )
 

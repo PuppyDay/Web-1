@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.auth.models import User
 
 
 class Author(models.Model):
     name = models.CharField(max_length=256, verbose_name='Имя')
-    email = models.EmailField(verbose_name='email', default='aaa@mail.ru')
     image = models.ImageField(upload_to='static/img/', null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def __str__(self):
         return self.name
@@ -16,24 +17,13 @@ class Author(models.Model):
         verbose_name_plural = 'Авторы'
 
 
-class User(models.Model):
-    author = models.OneToOneField('Author', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.author.name
-
-    class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
-
-
 class TagManager(models.Manager):
     def all_tags(self):
         return self.all()
 
 
 class Tag(models.Model):
-    title = models.CharField(max_length=256, verbose_name='Тэг')
+    title = models.CharField(max_length=256, unique=True, verbose_name='Тэг')
 
     objects = TagManager()
 
@@ -55,7 +45,7 @@ class LikeDislike(models.Model):
     )
 
     vote = models.SmallIntegerField(verbose_name='Голос', choices=VOTES, default=0)
-    user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Автор', default=0)
+    user = models.ForeignKey('Author', on_delete=models.CASCADE, verbose_name='Автор', default=0)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, default=0)
     object_id = models.PositiveIntegerField(default=0)
@@ -64,6 +54,7 @@ class LikeDislike(models.Model):
     class Meta:
         verbose_name = 'Лайк'
         verbose_name_plural = 'Лайки'
+        unique_together = ('user', 'content_type', 'object_id', )
 
 
 class ArticleManager(models.Manager):
@@ -81,7 +72,7 @@ class Article(models.Model):
     title = models.CharField(max_length=1024, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     date_create = models.DateField(auto_now_add=True, verbose_name='Дата создания')
-    author = models.ForeignKey('User', on_delete=models.CASCADE)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True)
     number_of_likes = models.IntegerField(verbose_name='Рейтинг', default=0)
     marks = GenericRelation(LikeDislike)
@@ -95,7 +86,7 @@ class Article(models.Model):
         return Answer.objects.question_answers(self.pk).count()
 
     def author_img(self):
-        return self.author.author.image
+        return self.author.image
 
     class Meta:
         verbose_name = 'Статья'
@@ -109,7 +100,7 @@ class AnswerManager(models.Manager):
 
 class Answer(models.Model):
     text = models.TextField(verbose_name='Текст')
-    author = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Автор')
+    author = models.ForeignKey('Author', on_delete=models.CASCADE, verbose_name='Автор')
     question = models.ForeignKey('Article', on_delete=models.CASCADE, verbose_name='Вопрос')
     is_correct = models.BooleanField(default=False, verbose_name='Верно')
     date_create = models.DateField(auto_now_add=True, verbose_name='Дата создания')
