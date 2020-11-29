@@ -1,50 +1,41 @@
 {% extends 'inc/base.html' %}
 {% load static %}
-{% block profile %}
-  {% include 'inc/navbar_no_profile.html' %}
-{% endblock profile %}
+
 {% block heading %}
   <div class="row row_quest">
     <span id="new" class="nq">Registration</span>
   </div>
 {% endblock heading %}
 {% block content %}
-  <form>
+  <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+    {% csrf_token %}
     <div class="form-group">
-      <label for="exampleInputLogin">Login</label>
-      <input type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp">
+      <label>Login</label>
+      {{ form.username }}
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <label >Email address</label>
+      {{ form.email }}
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
-      <label for="exampleInputNick">NickName</label>
-      <input type="text" class="form-control" id="exampleInputNick" aria-describedby="emailHelp">
+      <label>NickName</label>
+      {{ form.nickname }}
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
+      <label>Password</label>
+      {{ form.password }}
     </div>
     <div class="form-group">
       <label for="exampleInputPassword2">Repeat password</label>
       <input type="password" class="form-control" id="exampleInputPassword2">
     </div>
     <div class="form-group">
-      <label for="exampleFormControlFile1">Upload avatar</label>
-      <input type="file" class="form-control-file file_ad" id="exampleFormControlFile1">
+      <label>Upload avatar</label>
+      {{ form.image }}
     </div>
+     <button type="submit" class="but btn but_save btn-outline-secondary">Register!</button>
   </form>
 {% endblock content %}
 {% block button %}
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <a href="{% url 'index' %}">
-          <button type="button" class="but btn but_save btn-outline-secondary">Register!</button>
-        </a>
-      </div>
-    </div>
-  </div>
 {% endblock button %}

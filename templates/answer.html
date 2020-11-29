@@ -38,17 +38,15 @@
   {% include 'inc/paginator.html' %}
   <hr/>
   <div class="form-group">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Enter your answer here"></textarea>
+    <form method="post" class="needs-validation" novalidate>
+    {% csrf_token %}
+
+    {{ form.text }}
+    <button type="submit" class="but btn but_save btn-outline-secondary">Answer</button>
+
+
+    </form>
   </div>
 {% endblock content %}
 {% block button %}
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <a href="{% url 'index' %}">
-          <button type="button" class="but btn but_save btn-outline-secondary">Answer</button>
-        </a>
-      </div>
-    </div>
-  </div>
 {% endblock button %}

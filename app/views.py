@@ -1,6 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.core.paginator import Paginator
-from app.models import Article, User, Answer
+from app.models import *
+from app.forms import *
+from django.contrib import auth
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 
 def paginate(request, object_list, per_page=5):
@@ -48,20 +53,88 @@ def hot(request):
     return render(request, 'hot.html', context=context)
 
 
+@login_required
 def add_question(request):
-    return render(request, 'add_question.html', {})
+    if request.method == 'GET':
+        form = AddQuestionForm()
+    else:
+        form = AddQuestionForm(data=request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.author = request.user.profile
+            question.save()
+            question.tags.set(form.cleaned_data['tags'])
+            return redirect(reverse('question', kwargs={'pk': question.id}))
+    return render(request, 'add_question.html', {'form': form})       #TODO:создание своих тэгов
 
 
-def registration(request):
-    return render(request, 'registration.html', {})
+def registration(request):  # TODO:проверить всякое повторяющееся и корректность, дефолтная аватарка
+    if request.method == 'GET':
+        form = RegisterForm()
+    else:
+        form = RegisterForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = User.objects.create_user(username=form.cleaned_data['username'],
+                                            email=form.cleaned_data['email'],
+                                            password=form.cleaned_data['password'])
+
+            profile = Author.objects.create(user=user, name=form.cleaned_data['nickname'])
+            if form.cleaned_data['image'] is not None:
+                profile.image = form.cleaned_data['image']
+                profile.save()
+
+            auth.login(request, user)
+            # return redirect('/')
+    return render(request, 'registration.html', {'form': form})
 
 
 def log_in(request):
-    return render(request, 'log_in.html', {})
+    if request.method == 'GET':
+        form = LoginForm()
+    # path = request.GET.get('next')
+    else:
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            user = auth.authenticate(request, **form.cleaned_data)
+            if user is not None:
+                auth.login(request, user)
+        # return redirect(path)    #TODO: else ошибки, перевод на стр везде, проверка даннх
+    return render(request, 'log_in.html', {'form': form})
 
 
+def logout(request):
+    auth.logout(request)
+    return redirect('/')  # TODO: куда должен быть?
+
+
+@login_required
 def profile(request):
-    return render(request, 'profile.html', {})
+    if request.method == 'GET':
+        form = SettingsForm(initial={"username": request.user.username,
+                                     "email": request.user.email,
+                                     "nickname": request.user.profile.name})
+    else:
+        form = SettingsForm(request.POST, request.FILES, initial={"username": request.user.username,
+                                                                  "email": request.user.email,
+                                                                  "nickname": request.user.profile.name})
+        if form.is_valid():
+            user = request.user
+            profile = user.profile
+            if 'username' in form.changed_data:
+                user.username = form.cleaned_data['username']
+            if 'email' in form.changed_data:
+                user.email = form.cleaned_data['email']
+            if 'nickname' in form.changed_data:
+                profile.name = form.cleaned_data['nickname']
+            if 'image' in form.changed_data:
+                profile.image = form.cleaned_data['image']
+            profile.save()
+            user.save()
+        else:
+            pass
+
+    return render(request, 'profile.html', {'form': form})
+    # TODO:сделать для чего лейблы,маил проверка, пароль, при загрузке кинка показывалась, фото чтоб удалялось из папки
 
 
 def question_by_tag(request, string):
@@ -72,8 +145,26 @@ def question_by_tag(request, string):
 
 
 def answer(request, pk):
-    question = Article.objects.get(id=pk)
+    try:
+        question = Article.objects.get(id=pk)
+    except Article.DoesNotExist:
+        raise Http404
     all_answer = Answer.objects.question_answers(pk)
     context = paginate(request, all_answer, 3)
     context['question'] = question
+    if request.method == 'GET':
+        form = AnswerForm()
+    else:
+        form = AnswerForm(data=request.POST)              #TODO: ответить может только зарегестрированный
+        if form.is_valid():
+            ans = form.save(commit=False)
+            ans.author = request.user.profile
+            ans.question = question
+            ans.save()
+            all_ans = context['questions'].paginator.count
+            return redirect(reverse('question', kwargs={'pk': question.id}) + f'?page={int(all_ans / 3) +1}')
+
+    context['form'] = form
     return render(request, 'answer.html', context=context)
+    # TODO:сделать для красоты регулированеи в html
+

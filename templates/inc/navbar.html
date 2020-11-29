@@ -1,0 +1,33 @@
+ {%load static%}
+  <nav class="navbar navbar-expand-md fixed-top">
+        <a class="navbar-brand text-dark" href="{% url 'index' %}">AscNinel'</a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <form class="search form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <a href="{% url 'ask' %}"><button class="btn btn-outline-success my-2 my-sm-0" type="button">ASK</button></a>
+          </form>
+        </div>
+        <div class="profile"></div>
+
+   {% if user.is_authenticated %}
+     <img src="{{ user.profile.image.url }}" id="avatar_image" alt="avatar">
+          <div>
+            <div class="profile_info">
+              <span id="name">{{ user.profile.name }}</span>
+              <div class="row_1">
+                <a  href="{% url 'profile' %}">settings</a>
+                <a class="a_prof" href="{% url 'logout' %}">log out</a>
+              </div>
+            </div>
+           {% else %}
+                   <div>
+	<div class="profile_info">
+		<div class="row_1">
+			<a class="in_register text-dark" href="{% url 'login' %}">log in</a>
+			<a class="a_prof in_register text-dark" href="{% url 'signup' %}">log register</a>
+		</div>
+	</div>
+</div>
+             {% endif %}
+			   </div>
+      </nav>
