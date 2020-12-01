@@ -11,14 +11,21 @@
     <div class="form-group">
       <label>Title</label>
       {{ form.title }}
+       {% for error in form.title.errors %}
+    <p class="text-danger">{{ error }}</p>
+{% endfor %}
     </div>
     <div class="form-group">
       <label>Text</label>
       {{ form.text }}
+       {% for error in form.text.errors %}
+    <p class="text-danger">{{ error }}</p>
+{% endfor %}
     </div>
     <div class="form-group">
       <label>Tags</label>
       {{ form.tags }}
+
     </div>
 
 

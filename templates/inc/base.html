@@ -32,7 +32,7 @@
               <span class="popular_best">Popular Tags</span>
               <div>
                 {% for tag in tags %}
-            <a class="a_r_t" href="{% url 'tag' tag  %}">{{ tag }}</a><br/>
+            <a href="{% url 'tag' tag  %}">{{ tag }}</a><br/>
                 {% endfor %}
               </div>
             </div>

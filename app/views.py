@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.paginator import Paginator
 from app.models import *
 from app.forms import *
 from django.contrib import auth
-from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
@@ -90,6 +89,7 @@ def registration(request):  # TODO:проверить всякое повтор�
 
 def log_in(request):
     if request.method == 'GET':
+        request.session['next'] = request.GET.get('next', '/')
         form = LoginForm()
     # path = request.GET.get('next')
     else:
@@ -98,7 +98,7 @@ def log_in(request):
             user = auth.authenticate(request, **form.cleaned_data)
             if user is not None:
                 auth.login(request, user)
-        # return redirect(path)    #TODO: else ошибки, перевод на стр везде, проверка даннх
+                return redirect(request.session.pop('next'))
     return render(request, 'log_in.html', {'form': form})
 
 
@@ -145,17 +145,14 @@ def question_by_tag(request, string):
 
 
 def answer(request, pk):
-    try:
-        question = Article.objects.get(id=pk)
-    except Article.DoesNotExist:
-        raise Http404
+    question = get_object_or_404(Article, id=pk)
     all_answer = Answer.objects.question_answers(pk)
     context = paginate(request, all_answer, 3)
     context['question'] = question
     if request.method == 'GET':
         form = AnswerForm()
     else:
-        form = AnswerForm(data=request.POST)              #TODO: ответить может только зарегестрированный
+        form = AnswerForm(data=request.POST)
         if form.is_valid():
             ans = form.save(commit=False)
             ans.author = request.user.profile

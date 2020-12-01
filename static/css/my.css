@@ -118,10 +118,6 @@ nav {
 	margin-left: 50px;
 }
 
-.a_r_t {
-	color: red;
-}
-
 .in_register {
 	font-size: 30px;
 	margin-right: 50px;
@@ -168,4 +164,9 @@ nav {
 .page-link {
 	background: #f5f5f5;
 	border: 1px solid grey;
+}
+
+.error {
+	color: red;
+	text-align: center;
 }

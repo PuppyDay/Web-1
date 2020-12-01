@@ -27,6 +27,9 @@ class RegisterForm(forms.Form):
                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Login'}))
     password = forms.CharField(max_length=30,
                                widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+    repeat_password = forms.CharField(max_length=30,
+                                      widget=forms.PasswordInput(
+                                          attrs={'class': 'form-control', 'placeholder': 'Repeat password'}))
     # TODO: проверка пароля, уникальности логина?
     nickname = forms.CharField(max_length=30,
                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nickname'}))
@@ -34,6 +37,22 @@ class RegisterForm(forms.Form):
                              widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
     # TODO: дефолтная аватарка
     image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file file_ad'}))
+
+    def clean_repeat_password(self):
+        cleaned_data = super(RegisterForm, self).clean()
+
+        password = cleaned_data['password']
+        repeat_password = cleaned_data['repeat_password']
+        if password and repeat_password and password != repeat_password:
+            raise forms.ValidationError('Passwords do not match! Please, try again')
+        return cleaned_data
+
+    def clean(self):
+        cleaned_data = super(RegisterForm, self).clean()
+        if cleaned_data:
+            raise forms.ValidationError('Registration error')
+        return cleaned_data
+
 
 
 class AddQuestionForm(forms.ModelForm):
@@ -56,3 +75,4 @@ class AnswerForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your answer here'}),
         }
+# TODO:од клин?

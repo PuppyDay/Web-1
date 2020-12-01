@@ -38,14 +38,18 @@
   {% include 'inc/paginator.html' %}
   <hr/>
   <div class="form-group">
+     {% if user.is_authenticated %}
     <form method="post" class="needs-validation" novalidate>
     {% csrf_token %}
-
     {{ form.text }}
+       {% for error in form.text.errors %}
+    <p class="text-danger">{{ error }}</p>
+{% endfor %}
     <button type="submit" class="but btn but_save btn-outline-secondary">Answer</button>
-
-
     </form>
+    {% else %}
+    <span><h2 style="margin-left: 100px">Do you want to answer?? LOG IN!</h2></span>
+    {% endif %}
   </div>
 {% endblock content %}
 {% block button %}

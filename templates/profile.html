@@ -11,15 +11,24 @@
     <div class="form-group">
       <label>Login</label>
       {{ form.username }}
+      {% for error in form.username.errors %}
+    <p class="text-danger">{{ error }}</p><br/>
+{% endfor %}
     </div>
     <div class="form-group">
       <label>Email address</label>
       {{ form.email }}
+      {% for error in form.email.errors %}
+    <p class="text-danger">{{ error }}</p><br/>
+{% endfor %}
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
       <label >NickName</label>
       {{ form.nickname }}
+       {% for error in form.nickname.errors %}
+    <p class="text-danger">{{ error }}</p><br/>
+{% endfor %}
     </div>
     <div class="form-group">
       <label>Upload avatar</label>

@@ -6,21 +6,36 @@
   </div>
 {% endblock heading %}
 {% block content %}
+ {% for error in form.non_field_errors %}
+    <p class="text-danger">{{ error }}</p><br/>
+{% endfor %}
   <form method="post" action="{% url 'login' %}" novalidate>
     {% csrf_token %}
     <div class="form-group">
       <label >Login</label>
       {{ form.username }}
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+       {% for error in form.username.errors %}
+    <p class="text-danger">{{ error }}</p>
+{% endfor %}
     </div>
     <div class="form-group">
       <label >Password</label>
       {{ form.password }}
+       {% for error in form.password.errors %}
+    <p class="text-danger">{{ error }}</p>
+{% endfor %}
     </div>
     <input type="hidden" name="path" value="">
     <a href="{% url 'signup' %}">create new account</a>
       <br/>
   <!--   <input type="hidden" name="path" value="{{ path }}">           -->
+
+      {% if request.session.next %}
+                        <a href="{% url 'login' %}?next={{ request.session.next }}">
+                                                  <button type="submit" class="but btn btn-outline-secondary">Log in!</button> </a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-link"><button type="submit" class="but btn btn-outline-secondary">Log in!</button></a>
+                    {% endif %}
      <button type="submit" class="but btn btn-outline-secondary">Log in!</button>
   </form>
 {% endblock content %}
