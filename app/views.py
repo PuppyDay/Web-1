@@ -69,6 +69,7 @@ def add_question(request):
 
 def registration(request):  # TODO:проверить всякое повторяющееся и корректность, дефолтная аватарка
     if request.method == 'GET':
+        request.session['next'] = request.GET.get('next', '/')
         form = RegisterForm()
     else:
         form = RegisterForm(request.POST, request.FILES)
@@ -83,7 +84,7 @@ def registration(request):  # TODO:проверить всякое повтор�
                 profile.save()
 
             auth.login(request, user)
-            # return redirect('/')
+            return redirect(request.session.pop('next'))
     return render(request, 'registration.html', {'form': form})
 
 

@@ -47,11 +47,7 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError('Passwords do not match! Please, try again')
         return cleaned_data
 
-    def clean(self):
-        cleaned_data = super(RegisterForm, self).clean()
-        if cleaned_data:
-            raise forms.ValidationError('Registration error')
-        return cleaned_data
+    
 
 
 

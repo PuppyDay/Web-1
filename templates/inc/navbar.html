@@ -23,8 +23,8 @@
                    <div>
 	<div class="profile_info">
 		<div class="row_1">
-			<a class="in_register text-dark" href="{% url 'login' %}">log in</a>
-			<a class="a_prof in_register text-dark" href="{% url 'signup' %}">log register</a>
+			<a class="in_register text-dark" href="{% url 'login' %}?next={{ request.path }}">log in</a>
+			<a class="a_prof in_register text-dark" href="{% url 'signup' %}?next={{ request.path }}">log register</a>
 		</div>
 	</div>
 </div>

@@ -29,13 +29,6 @@
     <a href="{% url 'signup' %}">create new account</a>
       <br/>
   <!--   <input type="hidden" name="path" value="{{ path }}">           -->
-
-      {% if request.session.next %}
-                        <a href="{% url 'login' %}?next={{ request.session.next }}">
-                                                  <button type="submit" class="but btn btn-outline-secondary">Log in!</button> </a>
-                    {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-link"><button type="submit" class="but btn btn-outline-secondary">Log in!</button></a>
-                    {% endif %}
      <button type="submit" class="but btn btn-outline-secondary">Log in!</button>
   </form>
 {% endblock content %}
